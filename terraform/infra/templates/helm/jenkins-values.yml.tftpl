@@ -1,0 +1,47 @@
+---
+serviceAccountAgent:
+  create: true
+  name: ${jenkins_agent_sa_name}
+  annotations:
+    eks.amazonaws.com/role-arn: ${jenkins_iam_role_arn}
+
+controller:
+  installLatestPlugins: false
+  additionalPlugins:
+    - pipeline-model-definition:2.2141.v5402e818a_779
+    - generic-webhook-trigger:1.86.4
+    - aws-credentials:191.vcb_f183ce58b_9
+    - pipeline-aws:1.43
+    - codecommit-url-helper:0.0.3
+    - job-dsl:1.84
+    - ssh-agent:333.v878b_53c89511
+    - pipeline-utility-steps:2.16.0
+    - junit:1217.v4297208a_a_b_ce
+
+  JCasC:
+    enabled: true
+    configScripts:
+      pipelines: |
+        jobs:
+          - script: >
+              pipelineJob("${pipeline_job_name}") {
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url("${pipeline_repo_url}")
+                        }
+                        branches("${pipeline_repo_branch}")
+                        extensions {
+                          codeCommitURLHelper {
+                            credentialId('')
+                            repositoryName('')
+                          }
+                        }
+                      }
+                    }
+                    scriptPath("Jenkinsfile")
+                  }
+                }
+              }
