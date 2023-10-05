@@ -1,0 +1,64 @@
+#!/usr/bin/env groovy
+import hudson.plugins.git.*
+import hudson.plugins.git.extensions.impl.*
+
+properties([
+    parameters([
+        booleanParam(defaultValue: false, description: 'Refresh Jenkinsfile and exit.', name: 'REFRESH_JENKINSFILE'),
+    ])
+])
+
+if (currentBuild.number == 1) {
+    echo "Updating pipeline properties on first build. Please re-run pipeline with appropriate parameter values..."
+    currentBuild.result = 'SUCCESS'
+    return
+}
+
+if (params.REFRESH_JENKINSFILE) {
+    echo "Pipeline ended since <REFRESH_JENKINSFILE> param is set to ${params.REFRESH_JENKINSFILE}..."
+    currentBuild.result = 'SUCCESS'
+    return
+}
+
+podTemplate(
+    inheritFrom: 'default',
+    cloud: 'kubernetes',
+    containers: [
+        containerTemplate(
+            name: 'python',
+            image: 'python:3.11',
+            command: 'sleep',
+            args: '99d',
+            ttyEnabled: true
+        )
+    ],
+    serviceAccount: '<JENKINS_AGENT_SA_NAME>',
+    showRawYaml: false,
+) {
+    node(POD_LABEL) {
+        stage('Clone SCM') {
+            script {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[
+                        name: 'main'
+                    ]],
+                    extensions: [[
+                        $class: 'CodeCommitURLHelper',
+                        credentialId: ''
+                    ]],
+                    userRemoteConfigs: [[
+                        url: '<CODECOMMIT_REPO_URL>'
+                    ]]
+                ])
+            }
+        }
+        stage('Run App') {
+            script {
+                container('python') {
+                    sh "python3 app.py"
+                }
+            }
+        }
+    }
+}
