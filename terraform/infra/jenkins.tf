@@ -2,6 +2,9 @@ resource "kubernetes_namespace" "jenkins" {
   metadata {
     name = var.k8_ns_jenkins
   }
+  depends_on = [
+    module.eks,
+  ]
 }
 
 resource "helm_release" "jenkins" {
