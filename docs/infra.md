@@ -9,7 +9,7 @@ Terraform [infra](../terraform/infra) module will provision required infrastruct
 
 1. Modify input variables in TFVARS [file](../terraform/infra/config/common.tfvars). Refer to [variables.tf](../terraform/infra/variables.tf) for variable references.
 
-2. Change into bootstrap directory.
+2. Change into terraform infra directory.
 
     ```
     cd $PROJECT_ROOT/terraform/infra

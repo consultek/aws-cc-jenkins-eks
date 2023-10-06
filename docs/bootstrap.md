@@ -18,7 +18,7 @@ Terraform [bootstrap](../terraform/bootstrap) module is used to provision follow
     DYNAMODB_TABLE_NAME=$(awk -F "=" '/dynamodb_table/ {print $2}' $PROJECT_ROOT/terraform/backend.conf | tr -d ' "')
     ```
 
-2. Change into bootstrap directory.
+2. Change into terraform bootstrap directory.
 
     ```
     cd $PROJECT_ROOT/terraform/bootstrap
