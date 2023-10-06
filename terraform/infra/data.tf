@@ -1,8 +1,8 @@
-data "aws_eks_cluster" "workload" {
+data "aws_eks_cluster" "demo" {
   name = module.eks.cluster_name
 }
 
-data "aws_eks_cluster_auth" "workload" {
+data "aws_eks_cluster_auth" "demo" {
   name = module.eks.cluster_name
 }
 
@@ -33,7 +33,8 @@ data "aws_subnets" "eks_worker_nodes" {
 }
 
 data "aws_vpc" "eks" {
+  filter {
     name = "tag:Name"
-    values = var.vpc_tag_name
+    values = [var.vpc_tag_name]
   }
 }
