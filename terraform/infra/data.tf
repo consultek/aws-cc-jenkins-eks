@@ -34,7 +34,7 @@ data "aws_subnets" "eks_worker_nodes" {
 
 data "aws_vpc" "eks" {
   filter {
-    name = "tag:Name"
+    name   = "tag:Name"
     values = [var.vpc_tag_name]
   }
 }
