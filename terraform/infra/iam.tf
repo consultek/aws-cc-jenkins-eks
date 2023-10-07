@@ -1,6 +1,6 @@
 resource "aws_iam_role" "eks_jenkins" {
   name        = local.jenkins_iam_role_name
-  description = "IAM role for EKS Jenkins service account in ${var.aws_region} region."
+  description = "IAM role for EKS Jenkins controller service account in ${var.aws_region} region."
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"

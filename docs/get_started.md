@@ -8,12 +8,13 @@ Get Started
 
 - Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 - Install [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+- Install [kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
 
 ## Environment Setup
 
 ### AWS CLI Config & Credentials
 
-Please ensure [AWS CLI Config & Credentials][] of AWS organizations management account are set with sufficient [IAM][] privileges.
+Please ensure [AWS CLI Config & Credentials][] of target AWS account are set with sufficient [IAM][] privileges to run codebase.
 
 1. Using IAM user API access keys.
 
@@ -37,7 +38,7 @@ Please ensure [AWS CLI Config & Credentials][] of AWS organizations management a
     * ~/.aws/config
 
         ```shell
-        [profile <aws_profile>]  # profile name of target AWS account
+        [profile <aws_profile>]  # profile name of target AWS account. e.g. "consultek-demo"
         region = ap-southeast-2  # AWS region.
         sso_start_url = https://<org>.awsapps.com/start  # AWS SSO URL for AWS organization.
         sso_region = ap-southeast-2  # AWS SSO region.

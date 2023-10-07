@@ -24,7 +24,7 @@ variable "jenkins_agent_iam_role_name" {
 }
 
 variable "jenkins_iam_role_name" {
-  description = "IAM role name for EKS Jenkins service account."
+  description = "IAM role name for EKS Jenkins controller service account."
   type        = string
 }
 
@@ -44,7 +44,7 @@ variable "k8_ns_jenkins" {
 }
 
 variable "k8_sa_name_jenkins" {
-  description = "Kubernetes service account name for Jenkins."
+  description = "Kubernetes service account name for Jenkins controller."
   type        = string
 }
 

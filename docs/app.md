@@ -56,4 +56,4 @@ Setup application by pushing sample app code from codebase to AWS CodeCommit rep
     kubectl port-forward -n $JENKINS_NS --address 0.0.0.0 svc/jenkins 8080:8080
     ```
 
-4. Open browser and naviate to `https://localhost:8080`. Enter admin credentails (retrieved in step 3) and navigate to pipeline job. Execute Jenkins pipeline job to check if it is able to access AWS CodeCommit repo and run sample app.
+4. Open browser and enter url `https://localhost:8080` to access Jenkins UI. Enter Jenkins admin credentails (retrieved in step 3) and navigate to pipeline job for sample. Execute Jenkins pipeline job to check if it is able to access AWS CodeCommit repo. If successful, it will clone repo and configure pipeline as specified in Jenkinsfile.
