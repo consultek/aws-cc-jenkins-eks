@@ -3,7 +3,7 @@
 AWS CodeCommit Integration with Jenkins on EKS
 =========
 
-This codebase uses [Terraform][] code which can be used to demonstrate integration of AWS CodeCommit with Jenkins hosted on an AWS EKS cluster. Please refer to our [company](https://consultek.com.au) blog [post]() for further information.
+This codebase uses [Terraform][] code which can be used to demonstrate integration of AWS CodeCommit with Jenkins hosted on an AWS EKS cluster. Please refer to our [company](https://consultek.com.au) blog [post](https://consultek.com.au/aws/aws-codecommit-with-jenkins-on-eks) for further information.
 
 ## Table of Contents
 
